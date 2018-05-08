@@ -48,7 +48,7 @@
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.6&key=5779a6b1cdd52a0ffe55a8b82e0f4eac"></script>
     <script type="text/javascript">
 
-        var localCity = "苏州市";
+        var localCity = "郑州市";
         var realResultPoi = new Array();
 
         _pushResult = function(lng,lat){
@@ -60,9 +60,13 @@
         var map = new AMap.Map('amapcontainer',{
             mapStyle: 'amap://styles/normal',
             resizeEnable: true,
-            zoom: 10,
-            center: [120.729357,31.262675]
+            zoom: 10
         });
+        //地图图块加载完毕时使用
+        map.on('complete', function() {
+        	debugger;
+            map.setCity(localCity);
+        });        
 
         _makeInfowindow = function(map,lngLat,title,extData){
                 var infotitle = "当前坐标点";
@@ -125,6 +129,7 @@
 
         AMap.plugin(['AMap.ToolBar',
             'AMap.Geolocation',
+            'AMap.Geocoder',
             'AMap.Autocomplete',
             'AMap.PlaceSearch'
             ],
@@ -153,8 +158,6 @@
                     map.setCenter(result.center);
                 }
             });
-
-
 
             //实例化Autocomplete
             var autoOptions = {
