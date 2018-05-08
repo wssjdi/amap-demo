@@ -67,6 +67,10 @@
         	debugger;
             map.setCity(localCity);
         });        
+        
+        map.on('click', function(e) {
+            console.info(e.lnglat.getLng()+','+e.lnglat.getLat());
+        });
 
         _makeInfowindow = function(map,lngLat,title,extData){
                 var infotitle = "当前坐标点";
